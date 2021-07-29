@@ -1,0 +1,192 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<div style="margin: auto; padding: 10px;text-align: center;">
+    <h1>{{message}}</h1>
+</div>
+
+<div class="container " style="justify-content: space-around; padding: 10px 0;" >
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <fieldset>
+                    <legend class="text-center">Valid information is required to register. <span class="req"><small>
+                                Required *</small></span></legend>
+
+                    
+                    <div class="form-group">
+                        <label for="Name"><span class="req">* </span> Company Name:  </label>
+                        <input required type="text" [(ngModel)]="comp.companyName" name="name" id="name"
+                            class="form-control phone" maxlength="28" placeholder="Enter your company name..." />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turnover"><span class="req">* </span> Turnover: </label>
+                        <input class="form-control" type="text" [(ngModel)]="comp.turnover" name="email" id="txt"
+                            placeholder="Enter Company's turnover" />
+                        <div id="errFirst"></div>
+                    </div>
+
+                    
+
+                    <div class="form-group">
+                        <label for="boardOfDirectors"><span class="req">* </span> Board of Directors : </label>
+                        <input class="form-control" type="text" [(ngModel)]="comp.boardOfDirectors" name="boardOfDirectors" id="txt"
+                            placeholder="List board of Directors" />
+                        <div id="errLast"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stockexchangeId"><span class="req">* </span> Stock Exchange Name: </label>
+                        <input class="form-control" required type="text" [(ngModel)]="comp.stockExchangeId" 
+                         name="stockexchangeId" id="txt" placeholder="Name of stock Exchange" />
+                        <div id="errLast"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sectorId"><span class="req">* </span> Sector Name: </label>
+                        <input class="form-control" required type="text" [(ngModel)]="comp.sectorId" name="sectorId"
+                            id="sectorId" placeholder="Name of sector" />
+                        <div class="status" id="status"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="briefWriteup"><span class="req">* </span> Company Brief: </label>
+                        <input class="form-control" required type="text" [(ngModel)]="comp.briefWriteup" name="briefWriteup"
+                            id="briefWriteup" placeholder="Brief Write Up" />
+                        <div class="status" id="status"></div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" name="submit_reg" value="Register" (click)="registerNow()">
+                    </div>
+                </fieldset>
+            </form><!-- ends register form -->
+            <!-- second for to fiter user-->
+        </div><!-- ends col-6 -->
+
+    </div>
+</div>
+
+
+
+<div>
+    <div class="col-md-12" style="justify-content: space-around;display: flex;padding: 10px 0;">
+    <h2 class="mb-0">   To view all companies     <span>              </span>
+    <button class="btn btn-success" type="button" (click)="searchAll()" style="align-self: center;margin-right: 8px;"> Click Here</button>
+    
+    <button class="btn btn-success" type="button" (click)="searchAll()" style="align-self: center"> Refresh </button>
+    </h2>
+    </div>
+</div>
+
+
+<h1></h1>
+<h1></h1>
+<div class="container">
+    <div class="row">
+               <div id="custom-search-input">
+                                <div class="input-group col-md-12" style="text-align: center">
+                                    <input type="text" class="search-query form-control" placeholder="Search With Company Name"  name="name" [(ngModel)]="name"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger" type="button" (click)="findCompanyByName()">
+                                            <span class=" glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+    </div>
+    </div>
+
+    <h1></h1>
+    <h1></h1>
+
+    <div class="container">
+        <div class="row">
+                   <div id="custom-search-input">
+                                    <div class="input-group col-md-12" style="text-align: center">
+                                        <input type="text" class="search-query form-control" placeholder="Search With Company Pattern"  name="name1" [(ngModel)]="name1"/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-danger" type="button" (click)="findbyPattern()">
+                                                <span class=" glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+        </div>
+        </div>
+    
+        <h1></h1>
+        <h1></h1>
+
+        <div class="container">
+            <div class="row">
+                       <div id="custom-search-input">
+                                        <div class="input-group col-md-12" style="text-align: center">
+                                            <input type="text" class="search-query form-control" placeholder="Search With Stock Exchange"  name="name2" [(ngModel)]="name2"/>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-danger" type="button" (click)="findbyStockExchange()">
+                                                    <span class=" glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+            </div>
+            </div>
+        
+            <h1></h1>
+            <h1></h1>
+
+            <div class="container">
+                <div class="row">
+                           <div id="custom-search-input">
+                                            <div class="input-group col-md-12" style="text-align: center">
+                                                <input type="text" class="search-query form-control" placeholder="Search With Sector"  name="name3" [(ngModel)]="name3"/>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-danger" type="button" (click)="findbySector()">
+                                                        <span class=" glyphicon glyphicon-search"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                </div>
+                </div>
+            
+                <h1></h1>
+                <h1></h1>
+
+<div class="container col-md-12" style="justify-content: space-around;" >
+    <div class="row col-md-12 ">
+    <table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>Company ID</th>
+            <th>Name</th>
+            <th>Turnover (INR) </th>
+            <th>Stock Exchange</th>
+            <th>Sector</th>
+            <th>Brief</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let company of companies">
+            <td>{{company.companyId}}</td>
+            <td>{{company.companyName}}</td>
+            <td>{{company.turnover}}</td>
+            <td>{{company.stockExchangeId}}</td>
+            <td>{{company.sectorId}}</td>
+            <td>{{company.briefWriteup}}</td>
+            <td class="text-center"><button class="btn btn-danger btn-xs" (click)="delete(company.companyId)"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+          </tr>
+    </tbody>
+    </table>
+</div>
+
+<div>
+    <button class="btn btn-success" type="button" (click)="clearAll()" style="align-self: center"> Clear  </button>
+</div>
+
+

@@ -1,0 +1,165 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+
+<div style="margin: auto; padding: 10px;text-align: center;">
+    <h1>{{message}}</h1>
+</div>
+
+<div class="container " style="justify-content: space-around; padding: 10px 0;" >
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <fieldset>
+                    <legend class="text-center">Valid information is required to register IPOs. <span class="req"><small>
+                                Required *</small></span></legend>
+
+                    
+                    <div class="form-group">
+                        <label for="companyName"><span class="req">* </span> Company Name:  </label>
+                        <input required type="text" [(ngModel)]="ipo_in.companyName" name="companyName" id="name"
+                            class="form-control phone" maxlength="28" placeholder="Enter company name..." />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stockExchangeName"><span class="req">* </span> Stock Exchange Name: </label>
+                        <input class="form-control" type="text" [(ngModel)]="ipo_in.stockExchangeName" name="stockExchangeName" id="txt"
+                            placeholder="Enter Stock Exchange in which company is registered." />
+                        <div id="errFirst"></div>
+                    </div>
+
+                    
+
+                    <div class="form-group">
+                        <label for="price"><span class="req">* </span> Price : </label>
+                        <input class="form-control" type="text" [(ngModel)]="ipo_in.price" name="price" id="txt"
+                            placeholder="Enter Price" />
+                        <div id="errLast"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shares"><span class="req">* </span> Shares : </label>
+                        <input class="form-control" type="text" [(ngModel)]="ipo_in.shares" name="shares" id="txt"
+                            placeholder="Enter number of shares." />
+                        <div id="errLast"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="openDateTime"><span class="req">* </span> Open DateTime : </label>
+                        <input class="form-control" type="text" [(ngModel)]="ipo_in.openDateTime" name="openDateTime" id="txt"
+                            placeholder="Enter opening date and time." />
+                        <div id="errLast"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remarks"><span class="req">* </span> Remarks : </label>
+                        <input class="form-control" type="text" [(ngModel)]="ipo_in.remarks" name="remarks" id="txt"
+                            placeholder="Enter remarks." />
+                        <div id="errLast"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" name="submit_reg" value="Register" (click)="registerNow()">
+                    </div>
+                </fieldset>
+            </form><!-- ends register form -->
+            <!-- second for to fiter user-->
+        </div><!-- ends col-12 -->
+
+    </div>
+</div>
+
+
+<div>
+    <div class="col-md-12" style="justify-content: space-around;display: flex;padding: 10px 0;">
+    <h2 class="mb-0">   To view all listed IPOs     <span>              </span>
+    <button class="btn btn-success" type="button" (click)="searchAll()" style="align-self: center;margin-right: 8px;"> Click Here</button>
+    
+    <button class="btn btn-success" type="button" (click)="searchAll()" style="align-self: center"> Refresh </button>
+    </h2>
+    </div>
+</div>
+
+<div  class="container col-md-12" style="justify-content: space-around;" >
+    <div class="row col-md-12 ">
+    <table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>IPO Id</th>
+            <th>Company Name</th>
+            <th>Stock Exchange Name</th>
+            <th>Price</th>
+            <th>Shares listed</th>
+            <th>Open Date Time</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let ipo of ipos">
+            <td>{{ipo.id}}</td>
+            <td>{{ipo.companyName}}</td>
+            <td>{{ipo.stockExchangeName}}</td>
+            <td>{{ipo.price}}</td>
+            <td>{{ipo.shares}}</td>
+            <td>{{ipo.openDateTime}}</td>
+            <td>{{ipo.remarks}}</td>
+            <td class="text-center"><button class="btn btn-danger btn-xs" (click)="delete(ipo.id)"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+          </tr>
+    </tbody>
+    </table>
+</div>
+
+<h1></h1>
+<h1></h1>
+<div class="container" style="padding-bottom:10px;">
+    <div class="row">
+               <div id="custom-search-input">
+                                <div class="input-group col-md-12" style="text-align: center">
+                                    <input type="text" class="search-query form-control" placeholder="Search With IPO Id"  name="id" [(ngModel)]="id"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger" type="button" (click)="find()">
+                                            <span class=" glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+    </div>
+    </div>
+
+    <div *ngIf="variable1" class="container col-md-12" style="justify-content: space-around;padding-bottom:10px;" >
+        <div class="row col-md-12 ">
+        <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th>IPO Id</th>
+                <th>Company Name</th>
+                <th>Stock Exchange Name</th>
+                <th>Price</th>
+                <th>Shares listed</th>
+                <th>Open Date Time</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ipo_temp.id}}</td>
+                <td>{{ipo_temp.companyName}}</td>
+                <td>{{ipo_temp.stockExchangeName}}</td>
+                <td>{{ipo_temp.price}}</td>
+                <td>{{ipo_temp.shares}}</td>
+                <td>{{ipo_temp.openDateTime}}</td>
+                <td>{{ipo_temp.remarks}}</td>
+                <!-- <td class="text-center"><button class="btn btn-danger btn-xs" (click)="delete(ipo_in.id)"><span class="glyphicon glyphicon-remove"></span> Delete</button></td> -->
+              </tr>
+        </tbody>
+        </table>
+    </div>
+    </div>
+
+   <div style="padding-bottom:100px;">
+    </div>
+
+    
+

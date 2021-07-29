@@ -1,0 +1,168 @@
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+
+
+
+
+<div class="container " style="justify-content: space-around; padding: 10px 0;" >
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <fieldset>
+                    <legend class="text-center">Valid information is required to register STOCK EXCHANGE. <span class="req"><small>
+                                Required *</small></span></legend>
+
+                    
+                    <div class="form-group">
+                        <label for="Name"><span class="req">* </span> Stock Exchange Name:  </label>
+                        <input required type="text" [(ngModel)]="stock.stockExchangeName" name="name" id="name"
+                            class="form-control phone" maxlength="28" placeholder="Enter your stock exchange name..." />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turnover"><span class="req">* </span> Stock Exchange Details: </label>
+                        <input class="form-control" type="text" [(ngModel)]="stock.stockExchangeBrief" name="brief" id="txt"
+                            placeholder="Enter Sector details in brief" />
+                        <div id="errFirst"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turnover"><span class="req">* </span> Stock Exchange Address: </label>
+                        <input class="form-control" type="text" [(ngModel)]="stock.stockExchangeAddress" name="address" id="txt"
+                            placeholder="Enter Stock Exchange Address" />
+                        <div id="errFirst"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turnover"><span class="req">* </span> Remarks: </label>
+                        <input class="form-control" type="text" [(ngModel)]="stock.remarks" name="remarks" id="txt"
+                            placeholder="Enter remarks" />
+                        <div id="errFirst"></div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" name="submit_reg" value="Register" (click)="registerNow()">
+                    </div>
+                </fieldset>
+            </form><!-- ends register form -->
+            <!-- second for to fiter user-->
+        </div><!-- ends col-6 -->
+
+    </div>
+</div>
+
+<div style="margin: auto; padding: 10px;text-align: center;">
+    <h1>{{message}}</h1>
+</div>
+
+
+<div>
+    <div class="col-md-12" style="justify-content: space-around;display: flex;padding: 10px 0;">
+    <h2 class="mb-0">   To view all stock exchanges     <span>              </span>
+    <button class="btn btn-success" type="button" (click)="searchAll()" style="align-self: center;margin-right: 8px;"> Click Here</button>
+    
+    <button class="btn btn-success" type="button" (click)="searchAll()" style="align-self: center"> Refresh </button>
+    </h2>
+    </div>
+</div>
+
+<h1></h1>
+<h1></h1>
+<div class="container">
+    <div class="row">
+               <div id="custom-search-input">
+                                <div class="input-group col-md-12" style="text-align: center">
+                                    <input type="text" class="search-query form-control" placeholder="Search With Stock Exchange ID"  name="name" [(ngModel)]="name"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger" type="button" (click)="findStockExchangeByName()">
+                                            <span class=" glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+    </div>
+    </div>
+
+    <h1></h1>
+    <h1></h1>
+
+    <div class="container col-md-12" style="justify-content: space-around;" >
+        <div class="row col-md-12 ">
+        <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th>Stock Exchange ID</th>
+                <th>Stock Exchange Name</th>
+                <th>Stock Exchange Details </th>
+                <th>Address</th>
+                <th>Brief </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let stock of stockexchanges">
+                <td>{{stock.stockExchangeId}}</td>
+                <td>{{stock.stockExchangeName}}</td>
+                <td>{{stock.stockExchangeBrief}}</td>
+                <td>{{stock.stockExchangeAddress}}</td>
+                <td>{{stock.remarks}}</td>
+                <td class="text-center"><button class="btn btn-danger btn-xs" (click)="delete(stock.stockExchangeId)"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <div class="row">
+                   <div id="custom-search-input">
+                                    <div class="input-group col-md-12" style="text-align: center">
+                                        <input type="text" class="search-query form-control" placeholder="Type Stock Exchange name to list Companies"  name="name1" [(ngModel)]="name1"/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-danger" type="button" (click)="findCompaniesInStockExchange()">
+                                                <span class=" glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+        </div>
+        </div>
+    
+        <h1></h1>
+        <h1></h1>
+
+        <div *ngIf="variable" class="container col-md-12" style="justify-content: space-around;" >
+            <div class="row col-md-12 ">
+            <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>Company ID</th>
+                    <th>Name</th>
+                    <th>Turnover (INR) </th>
+                 
+                    <th>Sector</th>
+                    <th>Brief</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let company of companies">
+                    <td>{{company.companyId}}</td>
+                    <td>{{company.companyName}}</td>
+                    <td>{{company.turnover}}</td>
+                    
+                    <td>{{company.sectorId}}</td>
+                    <td>{{company.briefWriteup}}</td>
+                    </tr>
+            </tbody>
+            </table>
+        </div>
+
+<div>
+        <button class="btn btn-success" type="button" (click)="clearAll()" style="align-self: center"> Clear  </button>
+    </div>
+       
+

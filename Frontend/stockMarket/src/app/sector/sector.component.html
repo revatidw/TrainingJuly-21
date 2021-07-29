@@ -1,0 +1,151 @@
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<div style="margin: auto; padding: 10px;text-align: center;">
+    <h1>{{message}}</h1>
+</div>
+
+<div class="container " style="justify-content: space-around; padding: 10px 0;" >
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <fieldset>
+                    <legend class="text-center">Valid information is required to register SECTOR. <span class="req"><small>
+                                Required *</small></span></legend>
+
+                    
+                    <div class="form-group">
+                        <label for="Name"><span class="req">* </span> Sector Name:  </label>
+                        <input required type="text" [(ngModel)]="sec.sectorName" name="name" id="name"
+                            class="form-control phone" maxlength="28" placeholder="Enter your sector name..." />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turnover"><span class="req">* </span> Sector Details: </label>
+                        <input class="form-control" type="text" [(ngModel)]="sec.sectorBrief" name="brief" id="txt"
+                            placeholder="Enter Sector details in brief" />
+                        <div id="errFirst"></div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" name="submit_reg" value="Register" (click)="registerNow()">
+                    </div>
+                </fieldset>
+            </form><!-- ends register form -->
+            <!-- second for to fiter user-->
+        </div><!-- ends col-6 -->
+
+    </div>
+</div>
+
+
+
+<div>
+    <div class="col-md-12" style="justify-content: space-around;display: flex;padding: 10px 0;">
+    <h2 class="mb-0">   To view all sectors     <span>              </span>
+    <button class="btn btn-success" type="button" (click)="searchAll()" style="align-self: center;margin-right: 8px;"> Click Here</button>
+    
+    <button class="btn btn-success" type="button" (click)="searchAll()" style="align-self: center"> Refresh </button>
+    </h2>
+    </div>
+</div>
+
+
+<h1></h1>
+<h1></h1>
+<div class="container">
+    <div class="row">
+               <div id="custom-search-input">
+                                <div class="input-group col-md-12" style="text-align: center">
+                                    <input type="text" class="search-query form-control" placeholder="Search With Sector Name"  name="name" [(ngModel)]="name"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger" type="button" (click)="findSectoryByName()">
+                                            <span class=" glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+    </div>
+    </div>
+
+    <h1></h1>
+    <h1></h1>
+
+   
+
+        <div class="container col-md-12" style="justify-content: space-around;" >
+            <div class="row col-md-12 ">
+            <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>Sector ID</th>
+                    <th>Sector Name</th>
+                    <th>Sector Details </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let sector of sectors">
+                    <td>{{sector.sectorId}}</td>
+                    <td>{{sector.sectorName}}</td>
+                    <td>{{sector.sectorBrief}}</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>      
+
+        <div class="container">
+            <div class="row">
+                       <div id="custom-search-input">
+                                        <div class="input-group col-md-12" style="text-align: center">
+                                            <input type="text" class="search-query form-control" placeholder="Type Sector name to list Companies"  name="name1" [(ngModel)]="name1"/>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-danger" type="button" (click)="findCompaniesInSector()">
+                                                    <span class=" glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+            </div>
+            </div>
+        
+            <h1></h1>
+            <h1></h1>
+           
+
+<div *ngIf="variable" class="container col-md-12" style="justify-content: space-around;" >
+    <div class="row col-md-12 ">
+    <table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>Company ID</th>
+            <th>Name</th>
+            <th>Turnover (INR) </th>
+            <th>Stock Exchange</th>
+            <th>Sector</th>
+            <th>Brief</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let company of companies">
+            <td>{{company.companyId}}</td>
+            <td>{{company.companyName}}</td>
+            <td>{{company.turnover}}</td>
+            <td>{{company.stockExchangeId}}</td>
+            <td>{{company.sectorId}}</td>
+            <td>{{company.briefWriteup}}</td>
+            </tr>
+    </tbody>
+    </table>
+</div>
+
+<div>
+    <button class="btn btn-success" type="button" (click)="clearAll()" style="align-self: center"> Clear  </button>
+</div>
+
+
+
